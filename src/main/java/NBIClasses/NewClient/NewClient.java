@@ -1,6 +1,7 @@
 package NBIClasses.NewClient;
 
 import AbstractClass.NBI;
+import StaticMethods.Format;
 
 public class NewClient extends NBI {
 

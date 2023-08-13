@@ -1,12 +1,12 @@
-package NBIClasses.NewMatter;
+package NBIClasses.Conflicts;
 
-public class ClientInfo {
+public class Client {
 
     int clientNumber;
     String clientName;
     Boolean active;
 
-    public ClientInfo(int clientNumber, String clientName, Boolean active) {
+    public Client(int clientNumber, String clientName, Boolean active) {
         this.clientNumber = clientNumber;
         this.clientName = clientName;
         this.active = active;

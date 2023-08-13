@@ -32,8 +32,6 @@ public class Main {
             }
         } while (exit == false);
 
-        //NewMatterRequest.findClientName();
-
     }
 
 }

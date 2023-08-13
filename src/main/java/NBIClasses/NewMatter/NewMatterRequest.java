@@ -1,15 +1,7 @@
 package NBIClasses.NewMatter;
 
 import StaticMethods.RunConflicts;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class NewMatterRequest {
@@ -22,19 +14,21 @@ public class NewMatterRequest {
     public static int conflictSearchID;
     public static NewMatter nm;
     public static RunConflicts<NewMatter> obj;
-//    private static boolean isDataLoaded = false;
+
+    //    private static boolean isDataLoaded = false;
 
     public static void newMatter() {
 
         generateNBIForm();
         locateClientName(clientNumber);
-        isConflictSearchRequired(conflictSearchID);
 
         System.out.printf("\nCLIENT NUMBER: %d (%S)" +
                 "\nDESCRIPTION OF MATTER: %S" +
                 "\nCONFLICT SEARCH REQUIRED: %B\n", obj.getObj().getClientNumber(), clientName, obj.getObj().getDescription(), obj.getObj().getConflictSearch());
 
-        newMatterConflictSearch(obj);
+        if (obj.getObj().getConflictSearch()) {
+            newMatterConflictSearch(obj);
+        }
 
     }
 
@@ -47,11 +41,14 @@ public class NewMatterRequest {
 
         System.out.println("What is the description of matter?: ");
         description = scanner.nextLine();
+
         System.out.println("Are there parties involved in the matter?: " +
                 "\n1. Yes" +
                 "\n2. No");
-
         conflictSearchID = scanner.nextInt();
+
+        isConflictSearchRequired(conflictSearchID);
+        //listOfPartiesToBeSearched();
         scanner.close();
 
         nm = new NewMatter(clientNumber, clientName, 1, description, bool);
@@ -74,6 +71,34 @@ public class NewMatterRequest {
         } else {
             bool = false;
         }
+    }
+
+    //create array of ConflictInfo objects
+    public static void listOfPartiesToBeSearched() {
+
+        Boolean exit = false;
+
+        do {
+            System.out.println("Please submit additional parties.");
+            System.out.println("0. Display current list");
+            System.out.println("1. Person (FORMAT: \"LAST NAME, FIRST NAME\" and DESIGNATION)");
+            System.out.println("2. Company");
+            System.out.println("3. No more parties to add");
+            switch(scanner.nextInt()) {
+                case 0:
+                    System.out.println("display");
+                    break;
+                case 1:
+                    System.out.println("person");
+                    break;
+                case 2:
+                    System.out.println("company");
+                    break;
+                case 3:
+                    exit = true;
+                    break;
+            }
+        } while (exit == false);
     }
 
     public static void newMatterConflictSearch(RunConflicts<NewMatter> newMatter) {
