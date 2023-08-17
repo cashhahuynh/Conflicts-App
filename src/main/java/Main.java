@@ -1,7 +1,6 @@
 import NBIClasses.NewClient.NewClientRequest;
 import NBIClasses.NewMatter.NewMatterRequest;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {

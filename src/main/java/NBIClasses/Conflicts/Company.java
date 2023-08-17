@@ -19,4 +19,8 @@ public class Company extends Relationship {
         this.company = company;
     }
 
+    @Override
+    public String toString() {
+        return getRelationship().toUpperCase() + ": " + company;
+    }
 }

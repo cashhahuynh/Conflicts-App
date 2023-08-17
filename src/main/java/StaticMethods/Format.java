@@ -8,8 +8,6 @@ public class Format {
         formattedName = last + ", " + first;
         return formattedName;
     }
-//
-    //create more static methods to format municipalities and gov't entities
 
     public static String getFormattedName() {
         return formattedName;
