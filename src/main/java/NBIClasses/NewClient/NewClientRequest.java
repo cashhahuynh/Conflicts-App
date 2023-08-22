@@ -6,12 +6,14 @@ import NBIClasses.Conflicts.Person;
 import StaticMethods.Format;
 import StaticMethods.RunConflicts;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class NewClientRequest {
 
     public static Scanner scanner = new Scanner(System.in);
-    public static String clientName;
+    public static List<String> clientName = new ArrayList<>();
     public static String description;
     public static NewClient nc;
     public static RunConflicts<NewClient> obj;
@@ -27,7 +29,7 @@ public class NewClientRequest {
 
         System.out.printf("\nCLIENT NAME: %S" +
                 "\nDESCRIPTION OF MATTER: %S" +
-                "\nCONFLICT SEARCH REQUIRED: %B\n", obj.getObj().getClientName(), obj.getObj().getDescription(), obj.getObj().getConflictSearch());
+                "\nCONFLICT SEARCH REQUIRED: %B\n", nc.getClientName(), nc.getDescription(), nc.getConflictSearch());
 
         System.out.println("\nPARTIES TO BE SUBMITTED FOR CONFLICT SEARCH: ");
         LinkedListConflicts.display(l.head);
@@ -49,8 +51,6 @@ public class NewClientRequest {
         System.out.println("What is the description of matter? ");
         description = scanner.nextLine();
 
-        //scanner.close();
-
         nc = new NewClient(clientName, 1, description, true);
         obj = new RunConflicts<>(nc);
 
@@ -60,7 +60,7 @@ public class NewClientRequest {
         l = new LinkedListConflicts();
         l.head = null;
 
-        Boolean complete = false;
+        boolean complete = false;
         do {
 
             System.out.println("\nCurrent conflict searches: ");
@@ -90,7 +90,7 @@ public class NewClientRequest {
                     l.head = l.insertInEnd(person = new Person(last, first, designation), l.head);
 
                     if (designation.equalsIgnoreCase("client")) {
-                        clientName = Format.formatPerson(first, last);
+                        clientName.add(Format.formatPerson(first, last));
                     }
 
                     break;
@@ -104,7 +104,7 @@ public class NewClientRequest {
                     l.head = l.insertInEnd(company = new Company(companyName, designation), l.head);
 
                     if (designation.equalsIgnoreCase("client")) {
-                        clientName = companyName;
+                        clientName.add(companyName);
                     }
 
                     break;
