@@ -4,7 +4,7 @@ import DataManagement.LinkedListConflicts;
 import StaticMethods.RunConflicts;
 
 import java.util.Scanner;
-//
+
 public class NewClientRequest {
 
     public static Scanner scanner = new Scanner(System.in);
