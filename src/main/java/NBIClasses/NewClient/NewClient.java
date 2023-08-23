@@ -1,25 +1,23 @@
 package NBIClasses.NewClient;
 
 import AbstractClass.NBI;
+import DataManagement.LinkedListConflicts;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class NewClient extends NBI {
 
     List<String> clientName;
+    LinkedListConflicts l;
 
-    public NewClient(List<String> clientName, int NBI, String description, Boolean conflictSearch) {
+    public NewClient(List<String> clientName, LinkedListConflicts l, int NBI, String description, Boolean conflictSearch) {
         super(NBI, description, true);
         this.clientName = clientName;
+        this.l = l;
     }
 
-    //trying to figure out how to remove last /
+    public NewClient() {}
+
     public String getClientName() {
 
         String displayName;
@@ -40,6 +38,14 @@ public class NewClient extends NBI {
 
     public void setClientName(List<String> clientName) {
         this.clientName = clientName;
+    }
+
+    public LinkedListConflicts getL() {
+        return l;
+    }
+
+    public void setL(LinkedListConflicts l) {
+        this.l = l;
     }
 
     @Override

@@ -13,7 +13,7 @@ public class NewMatterRequest {
     public static String description;
     public static int conflictSearchID;
     public static NewMatter nm;
-    public static RunConflicts<NewMatter> obj;
+    //public static RunConflicts<NewMatter> obj;
 
     //    private static boolean isDataLoaded = false;
 
@@ -24,10 +24,10 @@ public class NewMatterRequest {
 
         System.out.printf("\nCLIENT NUMBER: %d (%S)" +
                 "\nDESCRIPTION OF MATTER: %S" +
-                "\nCONFLICT SEARCH REQUIRED: %B\n", obj.getObj().getClientNumber(), clientName, obj.getObj().getDescription(), obj.getObj().getConflictSearch());
+                "\nCONFLICT SEARCH REQUIRED: %B\n", nm.getClientNumber(), clientName, nm.getDescription(), nm.getConflictSearch());
 
-        if (obj.getObj().getConflictSearch()) {
-            newMatterConflictSearch(obj);
+        if (nm.getConflictSearch()) {
+            newMatterConflictSearch(nm);
         }
 
     }
@@ -52,7 +52,7 @@ public class NewMatterRequest {
         scanner.close();
 
         nm = new NewMatter(clientNumber, clientName, 1, description, bool);
-        obj = new RunConflicts<>(nm);
+        //obj = new RunConflicts<>(nm);
 
     }
 
@@ -101,8 +101,9 @@ public class NewMatterRequest {
         } while (exit == false);
     }
 
-    public static void newMatterConflictSearch(RunConflicts<NewMatter> newMatter) {
-        RunConflicts.runConflicts(newMatter);
+    public static void newMatterConflictSearch(NewMatter newMatter) {
+        //RunConflicts.runConflicts(newMatter);
+        System.out.println("cash note: Currently working on new client request");
     }
 
 //    //reads CSV file
