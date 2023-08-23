@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class RunConflicts {
-
+//
     public static LinkedListConflicts list;
     public static Company company;
     public static Person person;
