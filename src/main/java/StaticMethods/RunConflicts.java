@@ -67,7 +67,7 @@ public class RunConflicts <T> {
     }
 
     public static String designationHandler(String d, Scanner scanner, int partyID, String first, String last, String companyName) {
-        //
+
         boolean correctDesignation = true;
 
         switch(d.toUpperCase()) {
