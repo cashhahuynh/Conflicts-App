@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class RunConflicts {
+public class RunConflicts <T> {
 
     public static LinkedListConflicts list;
     public static Company company;
@@ -33,19 +33,20 @@ public class RunConflicts {
             System.out.println("1. Add person");
             System.out.println("2. Add company");
             System.out.println("3. No more parties to add");
-            String first, last, companyName, designation;
+            String first, last, companyName, designation = "";
+            int partyID = scanner.nextInt();
 
-            switch(scanner.nextInt()) {
+            switch(partyID) {
                 case 1:
                     scanner.nextLine();
-                    System.out.println("What is the party's first name?");
+                    System.out.println("\nWhat is the party's first name?");
                     first = scanner.nextLine();
 
                     System.out.println("What is the party's last name?");
                     last = scanner.nextLine();
 
                     System.out.println("What is the party's involvement?");
-                    designation = scanner.nextLine();
+                    designation = designationHandler(scanner.nextLine(), scanner);
                     list.head = list.insertInEnd(person = new Person(last, first, designation), list.head);
 
                     if (designation.equalsIgnoreCase("client")) {
@@ -54,11 +55,11 @@ public class RunConflicts {
                     break;
                 case 2:
                     scanner.nextLine();
-                    System.out.println("What is the party's name?");
+                    System.out.println("\nWhat is the party's name?");
                     companyName = scanner.nextLine();
 
                     System.out.println("What is this party's involvement?");
-                    designation = scanner.nextLine();
+                    designation = designationHandler(scanner.nextLine(), scanner);
                     list.head = list.insertInEnd(company = new Company(companyName, designation), list.head);
 
                     if (designation.equalsIgnoreCase("client")) {
@@ -73,18 +74,52 @@ public class RunConflicts {
 
     }
 
+    public static String designationHandler(String d, Scanner scanner) {
+
+        boolean correctDesignation = true;
+
+        switch(d.toUpperCase()) {
+            case "CLIENT":
+                d = "CLIENT";
+                break;
+            case "CLIENT RELATED":
+                d = "CLIENT RELATED";
+                break;
+            case "CLIENT ON BEHALF OF":
+                d = "CLIENT/ON BEHALF OF";
+                break;
+            case "ADVERSE":
+                d = "ADVERSE";
+                break;
+            case "OTHER INVOLVED":
+                d = "OTHER INVOLVED";
+                break;
+            default:
+                System.out.println("Not valid input. Please enter acceptable party involvement.");
+                correctDesignation = false;
+        }
+
+        if (!correctDesignation) {
+            d = scanner.nextLine();
+            d = designationHandler(d, scanner);
+        }
+
+        return d;
+
+    }
+
     public static void addClientToDisplay(String clientName) {
         clientNameList.add(clientName);
     }
 
     public static void runConflicts() {
-        System.out.println("Thanks for submitting. We will run a search and generate a report shortly for the parties below.");
+        System.out.println("\nThanks for submitting. We will run a search and generate a report shortly for the parties below.");
         LinkedListConflicts.display(list.head);
     }
 
-//    public static void reset() {
-//        list = new LinkedListConflicts();
-//        clientNameList = new ArrayList<>();
-//    }
+    public static void reset() {
+        list = new LinkedListConflicts();
+        clientNameList = new ArrayList<>();
+    }
 
 }
