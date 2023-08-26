@@ -30,6 +30,6 @@ public class Person extends Relationship {
 
     @Override
     public String toString() {
-        return getRelationship().toUpperCase() + ": " + lastName + ", " + firstName;
+        return getRelationship().toUpperCase() + ": " + lastName.toUpperCase() + ", " + firstName.toUpperCase();
     }
 }

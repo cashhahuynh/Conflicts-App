@@ -21,6 +21,6 @@ public class Company extends Relationship {
 
     @Override
     public String toString() {
-        return getRelationship().toUpperCase() + ": " + company;
+        return getRelationship().toUpperCase() + ": " + company.toUpperCase();
     }
 }
