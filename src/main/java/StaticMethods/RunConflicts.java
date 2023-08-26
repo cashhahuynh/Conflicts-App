@@ -46,12 +46,8 @@ public class RunConflicts <T> {
                     last = scanner.nextLine();
 
                     System.out.println("What is the party's involvement?");
-                    designation = designationHandler(scanner.nextLine(), scanner);
+                    designation = designationHandler(scanner.nextLine(), scanner, partyID, first, last, "");
                     list.head = list.insertInEnd(person = new Person(last, first, designation), list.head);
-
-                    if (designation.equalsIgnoreCase("client")) {
-                        addClientToDisplay(Format.formatPerson(first, last));
-                    }
                     break;
                 case 2:
                     scanner.nextLine();
@@ -59,12 +55,8 @@ public class RunConflicts <T> {
                     companyName = scanner.nextLine();
 
                     System.out.println("What is this party's involvement?");
-                    designation = designationHandler(scanner.nextLine(), scanner);
+                    designation = designationHandler(scanner.nextLine(), scanner, partyID, "", "", companyName);
                     list.head = list.insertInEnd(company = new Company(companyName, designation), list.head);
-
-                    if (designation.equalsIgnoreCase("client")) {
-                        addClientToDisplay(companyName);
-                    }
                     break;
                 case 3:
                     complete = true;
@@ -74,13 +66,18 @@ public class RunConflicts <T> {
 
     }
 
-    public static String designationHandler(String d, Scanner scanner) {
+    public static String designationHandler(String d, Scanner scanner, int partyID, String first, String last, String companyName) {
 
         boolean correctDesignation = true;
 
         switch(d.toUpperCase()) {
             case "CLIENT":
                 d = "CLIENT";
+                if (partyID == 1) {
+                    addClientToDisplay(Format.formatPerson(first, last));
+                } else {
+                    addClientToDisplay(companyName);
+                }
                 break;
             case "CLIENT RELATED":
                 d = "CLIENT RELATED";
@@ -101,7 +98,7 @@ public class RunConflicts <T> {
 
         if (!correctDesignation) {
             d = scanner.nextLine();
-            d = designationHandler(d, scanner);
+            d = designationHandler(d, scanner, partyID, first, last, companyName);
         }
 
         return d;
