@@ -8,18 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class RunConflicts <T> {
+public class ConflictsForm {
 
-    public static LinkedListConflicts list;
+    public static LinkedListConflicts list = new LinkedListConflicts();
     public static Company company;
     public static Person person;
     public static List<String> clientNameList = new ArrayList<>();
 
-    public static void addParties(Scanner scanner) {
-        list = new LinkedListConflicts();
+    static {
         list.head = null;
+    }
+
+    public static void addParties(Scanner scanner) {
 
         boolean complete = false;
+
         do {
             System.out.println("\nCurrent conflict searches: ");
             if (list.head == null) {
@@ -110,8 +113,7 @@ public class RunConflicts <T> {
     }
 
     public static void runConflicts() {
-        System.out.println("\nThanks for submitting. We will run a search and generate a report shortly for the parties below.");
-        LinkedListConflicts.display(list.head);
+        ConflictsSubmitter.runConflicts(list);
     }
 
     public static void reset() {

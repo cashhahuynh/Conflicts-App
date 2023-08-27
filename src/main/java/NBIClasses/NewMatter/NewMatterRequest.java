@@ -1,7 +1,5 @@
 package NBIClasses.NewMatter;
 
-import StaticMethods.RunConflicts;
-
 import java.util.Scanner;
 
 public class NewMatterRequest {
