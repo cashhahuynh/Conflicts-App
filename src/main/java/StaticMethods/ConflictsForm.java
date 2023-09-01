@@ -11,9 +11,9 @@ import java.util.Scanner;
 public class ConflictsForm {
 
     public static LinkedListConflicts list = new LinkedListConflicts();
+    public static List<String> clientNameList = new ArrayList<>();
     public static Company company;
     public static Person person;
-    public static List<String> clientNameList = new ArrayList<>();
 
     static {
         list.head = null;
@@ -63,13 +63,18 @@ public class ConflictsForm {
                     break;
                 case 3:
                     complete = true;
+
+                    if (clientNameList.size() == 0) {
+                        System.out.println("\nTHIS REQUEST NEEDS A CLIENT. CAN'T SUBMIT UNTIL COMPLETED.");
+                        addParties(scanner);
+                    }
             }
 
         } while (complete == false);
 
     }
 
-    public static String designationHandler(String d, Scanner scanner, int partyID, String first, String last, String companyName) {
+    private static String designationHandler(String d, Scanner scanner, int partyID, String first, String last, String companyName) {
 
         boolean correctDesignation = true;
 
@@ -108,7 +113,7 @@ public class ConflictsForm {
 
     }
 
-    public static void addClientToDisplay(String clientName) {
+    private static void addClientToDisplay(String clientName) {
         clientNameList.add(clientName);
     }
 

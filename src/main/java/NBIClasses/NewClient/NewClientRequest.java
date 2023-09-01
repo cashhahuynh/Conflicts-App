@@ -16,11 +16,10 @@ public class NewClientRequest {
 
         generateNBIForm();
         finalFormView();
-        finalFormSelection();
 
     }
 
-    public static void generateNBIForm() {
+    private static void generateNBIForm() {
 
         conflictsForm.addParties(scanner);
         scanner.nextLine();
@@ -32,22 +31,20 @@ public class NewClientRequest {
 
     }
 
-    public static void deleteNBIForm() {
-        description = "";
+    private static void deleteNBIForm() {
         nc = new NewClient();
-
         conflictsForm.reset();
 
         System.out.println("\nPLEASE ENTER ALL INFORMATION FOR YOUR NEW CLIENT REQUEST: ");
         NewClientRequest.newClient();
     }
 
-    public static void submitNBIForm() {
+    private static void submitNBIForm() {
         conflictsForm.runConflicts();
         scanner.close();
     }
 
-    public static void correctNBIForm() {
+    private static void correctNBIForm() {
         System.out.println("\nPlease select the following to correct:" +
                 "\n1. Additional parties to be searched" +
                 "\n2. Change description of matter");
@@ -60,10 +57,12 @@ public class NewClientRequest {
             description = scanner.nextLine();
             nc = new NewClient(conflictsForm.clientNameList, conflictsForm.list, 1, description, true);
         }
-        correctedFinalFormView();
+
+        finalFormView();
+
     }
 
-    public static void finalFormView() {
+    private static void finalFormView() {
 
         System.out.println("\n* * * * * * * * * * NBI FORM * * * * * * * * * *");
         System.out.printf("\nCLIENT NAME: %S" +
@@ -75,14 +74,11 @@ public class NewClientRequest {
 
         System.out.println("\n* * * * * * * * * * NBI FORM * * * * * * * * * *");
 
-    }
-
-    public static void correctedFinalFormView() {
-        finalFormView();
         finalFormSelection();
+
     }
 
-    public static void finalFormSelection() {
+    private static void finalFormSelection() {
         boolean complete = false;
         do {
             System.out.println("\nPlease select following options before completing your form:" +
