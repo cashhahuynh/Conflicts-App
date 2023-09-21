@@ -117,8 +117,8 @@ public class ConflictsForm {
         clientNameList.add(clientName);
     }
 
-    public static void runConflicts() {
-        ConflictsSubmitter.runConflicts(list);
+    public static void initiateConflictsSearch() {
+        ConflictsSubmitter.conflictSubmitter(list.head);
     }
 
     public static void reset() {

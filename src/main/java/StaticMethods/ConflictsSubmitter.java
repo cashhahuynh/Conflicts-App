@@ -1,6 +1,5 @@
 package StaticMethods;
 
-import DataManagement.LinkedListConflicts;
 import DataManagement.LinkedListNode;
 
 import java.util.ArrayList;
@@ -9,31 +8,47 @@ import java.util.List;
 public class ConflictsSubmitter {
 
     private static int hits;
-    private static List<String> toSearchList = new ArrayList<>();
-    private static List<String> conflictsReportList = new ArrayList<>();
+    private static final List<Object> toSearchList = new ArrayList<>();
+    private static final List<String> conflictsReportList = new ArrayList<>();
 
-    //create list from linkedlist object
-    public static void runConflicts(LinkedListConflicts list) {
+    public static void conflictSubmitter(LinkedListNode head) {
+
+        newList(head);
+        generateCurrentSearch();
+        searchDataBase();
+        addToDataBase();
+        generateConflictReport();
+
+    }
+
+    private static void newList(LinkedListNode head) {
+        LinkedListNode ll = head;
+
+        while(!(ll == null)) {
+            toSearchList.add(ll.data);
+            ll = ll.next;
+        }
+    }
+
+    private static void searchDataBase() {
+        System.out.println("searchDataBase method being called: purpose is to search in database before adding new search");
+    }
+
+    private static void addToDataBase() {
+        System.out.println("addToDataBase method being called: purpose is to add to existing database");
+
+    }
+
+    private static void generateCurrentSearch() {
         System.out.println("\nThanks for submitting. We will run a search and generate a report shortly for the parties below.");
-        LinkedListConflicts.display(list.head);
 
-        //LinkedListConflicts object calls display method, which takes LinkedListNode as a parameter
-        
+        for (Object i : toSearchList) {
+            System.out.println(i);
+        }
     }
 
-    //purpose is to search in database before adding new search
-    public static void searchDataBase(List<String> list) {
-        toSearchList = list;
-    }
-
-    //purpose is to add to existing database- create json object and add to json file
-    public static void addToDataBase() {
-
-    }
-
-    //will be responsible for returning conflict report
-    public static void generateReport() {
-
+    public static void generateConflictReport() {
+        System.out.println("generateConflictReport method being called: purpose is to return conflict report with matches");
     }
 
 }

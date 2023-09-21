@@ -40,7 +40,7 @@ public class NewClientRequest {
     }
 
     private static void submitNBIForm() {
-        conflictsForm.runConflicts();
+        conflictsForm.initiateConflictsSearch();
         scanner.close();
     }
 

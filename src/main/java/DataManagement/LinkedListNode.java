@@ -2,8 +2,8 @@ package DataManagement;
 
 public class LinkedListNode {
 
-    Object data;
-    LinkedListNode next;
+    public Object data;
+    public LinkedListNode next;
 
     public LinkedListNode(Object data) {
         this.data = data;
