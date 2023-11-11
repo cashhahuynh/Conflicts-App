@@ -12,11 +12,13 @@ public class ConflictsSubmitter {
     private static final List<Object> toSearchList = new ArrayList<>();
     private static final List<String> conflictsReportList = new ArrayList<>();
     private static BufferedReader br;
+//    private static List<String> filteredList;
 
     public static void conflictSubmitter(LinkedListNode head) {
 
         newList(head);
         generateCurrentSearch();
+//        initializeFilteredList();
         searchDataBase();
         addToDataBase();
         generateConflictReport();
@@ -32,27 +34,39 @@ public class ConflictsSubmitter {
         }
     }
 
-    //to work on: csv reader splits individual names...
     private static void searchDataBase() {
         System.out.println("searchDataBase method being called: purpose is to search in database before adding new search\n");
-        System.out.println("Conflicts database from CSV test:");
 
         String line = "";
         String splitBy = ",";
-        int counter = 0;
+        hits = 0;
 
         //to do 1: compare database with names and store hits in new list
         //to do 2: organize hits based on designation then names? comparator/comparable?
+
+        //idea 1.1: loop through toSearchList and compare to CSV file, if a match add to conflictsReportList
+        //idea 1.2: use pattern and matcher classes on filteredList so report can return main keywords
+        for (int i = 0; i < toSearchList.size(); i++) {
+            //want to get it to print only name, not toString method from Person and Company classes which prints designation and name
+            System.out.println("test: " + toSearchList.get(i));
+        }
+
+        //csv reader to live in for loop above putting here to test performance
         try {
             br = new BufferedReader(new FileReader("/Users/cash/Downloads/Conflicts App/src/main/resources/conflictsDataBase.csv"));
             while ((line = br.readLine()) != null) {
-                counter++;
                 String [] list = line.split(splitBy);
-                if (list[1] == "") {
-                    System.out.printf("Party %d: " + list[0] + " / Involvement: " + list[1] + "\n", counter);
+
+                if (list[0].startsWith("#")) {
+                    //do nothing
+                } else if (list[1].isEmpty()) {
+                    hits++;
+                    System.out.printf("Hit %d: %s (%s) \n", hits, list[0].toUpperCase(), list[2].toUpperCase());
                 } else {
-                    System.out.printf("Party %d: " + list[0] + " " + list[1] + " / Involvement: " + list[2] + "\n", counter);
+                    hits++;
+                    System.out.printf("Hit %d: %s, %s (%s) \n", hits, list[1].toUpperCase(), list[0].toUpperCase(), list[2].toUpperCase());
                 }
+
             }
         } catch (IOException o) {
             o.printStackTrace();
@@ -60,8 +74,9 @@ public class ConflictsSubmitter {
 
     }
 
+    //might have to scrap method because app is static and i'm not using relational database yet
     private static void addToDataBase() {
-        System.out.println("addToDataBase method being called: purpose is to add to existing database");
+        System.out.println("\naddToDataBase method being called: purpose is to add to existing database");
 
     }
 
@@ -74,7 +89,17 @@ public class ConflictsSubmitter {
     }
 
     public static void generateConflictReport() {
-        System.out.println("generateConflictReport method being called: purpose is to return conflict report with matches");
+        System.out.println("\ngenerateConflictReport method being called: purpose is to return conflict report with matches");
+        System.out.printf("Total hits: %d\n", hits);
     }
+
+    //work on method later to help filter generic terms from search so that report returns important keywords
+//    public static void initializeFilteredList () {
+//        filteredList = new ArrayList<>();
+//        filteredList.add("limited");
+//        filteredList.add("company");
+//        filteredList.add("limited liability company");
+//        filteredList.add("limited liability partnership");
+//    }
 
 }
